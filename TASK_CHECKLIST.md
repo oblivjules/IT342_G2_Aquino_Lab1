@@ -2,45 +2,45 @@
 
 ## DONE
 - [x] Backend setup with Spring Boot 3.2.2
-  - Commit: TBD (after git push)
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] User model creation with JPA
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] User repository with custom queries
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] POST /api/auth/register endpoint
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] POST /api/auth/login endpoint
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] GET /api/user/me endpoint (protected)
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] JWT token generation and validation
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] BCrypt password encryption
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] Security configuration with CORS
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] Database connection (MySQL)
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] React project setup with Vite
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] Register page with form validation
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] Login page with form validation
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] Dashboard/Profile page (protected)
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] Logout functionality
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] API integration with Axios
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] Authentication context and state management
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] Protected routes implementation
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] Responsive UI styling
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] README.md documentation
-  - Commit: TBD
+  - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 
 ## IN-PROGRESS
 - [ ] Git repository initialization and commits
