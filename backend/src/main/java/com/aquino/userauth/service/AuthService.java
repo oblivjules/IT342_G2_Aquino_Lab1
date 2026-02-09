@@ -6,8 +6,8 @@ import com.aquino.userauth.dto.RegisterRequest;
 import com.aquino.userauth.model.User;
 import com.aquino.userauth.repository.UserRepository;
 import com.aquino.userauth.security.TokenProvider;
-import com.aquino.userauth.util.PasswordEncoder;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -37,7 +37,7 @@ public class AuthService {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
-        user.setPasswordHash(passwordEncoder.hashRawPassword(request.getPassword()));
+        user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         userRepository.save(user);
@@ -51,7 +51,7 @@ public class AuthService {
 
         User user = userOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials"));
 
-        if (!passwordEncoder.matchesRawPassword(request.getPassword(), user.getPasswordHash())) {
+        if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
         }
 
