@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #386641 0%, #6a994e 100%);
     padding: 20px;
 }
 
@@ -45,14 +45,14 @@
 
 .form-group input:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #6a994e;
+    box-shadow: 0 0 0 3px rgba(106, 153, 78, 0.1);
 }
 
 .btn-submit {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #6a994e 0%, #a7c957 100%);
     color: white;
     border: none;
     border-radius: 5px;
@@ -72,12 +72,34 @@
 }
 
 .error-message {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: #fce4e4;
+    color: #8b2c2e;
     padding: 12px;
     border-radius: 5px;
     margin-bottom: 20px;
-    border: 1px solid #f5c6cb;
+    border: 1px solid #bc4749;
+    animation: slideIn 0.3s ease;
+}
+
+.success-message {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #6a994e;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .auth-footer {
@@ -88,7 +110,7 @@
 }
 
 .auth-footer a {
-    color: #667eea;
+    color: #6a994e;
     text-decoration: none;
     font-weight: 600;
 }

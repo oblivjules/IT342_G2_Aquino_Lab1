@@ -1,6 +1,6 @@
 .dashboard-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #386641 0%, #6a994e 100%);
     padding: 20px;
 }
 
@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto 30px;
     background: white;
     padding: 20px;
@@ -24,7 +24,7 @@
 
 .btn-logout {
     padding: 10px 20px;
-    background: #e74c3c;
+    background: #bc4749;
     color: white;
     border: none;
     border-radius: 5px;
@@ -35,49 +35,54 @@
 }
 
 .btn-logout:hover {
-    background: #c0392b;
+    background: #a03a3c;
 }
 
-.profile-card {
-    max-width: 600px;
+.welcome-card {
+    max-width: 700px;
     margin: 0 auto;
     background: white;
     border-radius: 10px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    padding: 30px;
+    padding: 60px 40px;
+    text-align: center;
 }
 
-.profile-card h2 {
-    color: #333;
-    margin-bottom: 25px;
-    font-size: 24px;
-    border-bottom: 2px solid #667eea;
-    padding-bottom: 15px;
+.welcome-title {
+    color: #386641;
+    font-size: 36px;
+    margin-bottom: 15px;
+    font-weight: 700;
 }
 
-.profile-section {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.profile-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 5px;
-    border-left: 4px solid #667eea;
-}
-
-.profile-item label {
+.welcome-subtitle {
     color: #666;
-    font-weight: 600;
-    min-width: 120px;
+    font-size: 18px;
+    margin-bottom: 40px;
 }
 
-.profile-item span {
-    color: #333;
-    font-weight: 500;
-    word-break: break-all;
+.btn-profile {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #6a994e 0%, #a7c957 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(106, 153, 78, 0.3);
+}
+
+.btn-profile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(106, 153, 78, 0.4);
+}
+
+.btn-profile svg {
+    width: 24px;
+    height: 24px;
 }
