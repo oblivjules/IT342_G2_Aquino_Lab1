@@ -69,26 +69,22 @@
   - Commit: 3d71cb5b6888a67e59d8e98ad8b1ca8b7f51e4f1
 - [x] Software Requirements Specification (SRS) document
   - Commit: ad24bb4
+- [x] Application screenshots captured
+  - Register, Login, Dashboard, Profile, Logout modal
+- [x] Database screenshots captured
+  - MySQL users table structure and sample data
+- [x] ERD diagram included in documentation
+- [x] Final documentation review completed
 - [x] Git repository initialization and commits
-  - Commits: 3d71cb5, 4f1939d, 2a83905, 6959ea7, 02b6d3e, 2b97a9c, e03c6ff, 9871f36, e022abf, c4449e9, ad24bb4, ad3135a
+  - Commits: 3d71cb5, 4f1939d, 2a83905, 6959ea7, 02b6d3e, 2b97a9c, e03c6ff, 9871f36, e022abf, c4449e9, ad24bb4, ad3135a, 882cc05
+- [x] Pushed to GitHub public repository
+  - Repository: IT342_G2_Aquino_Lab1
 
 ## IN-PROGRESS
-- [ ] None (all implementation tasks complete)
+- [ ] None
 
 ## TODO
-- [ ] Capture application screenshots
-  - Register page screenshot
-  - Login page screenshot  
-  - Dashboard screenshot
-  - Profile page screenshot
-  - Logout modal screenshot
-- [ ] Capture database screenshots
-  - MySQL users table structure
-  - Sample user data in database
-- [ ] Create/update ERD diagram
-- [ ] Final documentation review
-- [ ] Push to GitHub public repository
-- [ ] MS Teams submission
+- [ ] Mobile application implementation (future enhancement)
 
 ## Notes
 
