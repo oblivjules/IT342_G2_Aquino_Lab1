@@ -12,6 +12,7 @@ const Register = () => {
         lastName: '',
     });
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
     const { register } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -19,11 +20,47 @@ const Register = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+        setError('');
+        setSuccess('');
+    };
+
+    const validateForm = () => {
+        if (formData.username.length < 3) {
+            setError('Username must be at least 3 characters long');
+            return false;
+        }
+        if (!/^[a-zA-Z0-9_]+$/.test(formData.username)) {
+            setError('Username can only contain letters, numbers, and underscores');
+            return false;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            setError('Please enter a valid email address');
+            return false;
+        }
+        if (formData.password.length < 6) {
+            setError('Password must be at least 6 characters long');
+            return false;
+        }
+        if (formData.firstName && formData.firstName.length < 2) {
+            setError('First name must be at least 2 characters long');
+            return false;
+        }
+        if (formData.lastName && formData.lastName.length < 2) {
+            setError('Last name must be at least 2 characters long');
+            return false;
+        }
+        return true;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+        setSuccess('');
+
+        if (!validateForm()) {
+            return;
+        }
+
         setLoading(true);
 
         try {
@@ -34,9 +71,18 @@ const Register = () => {
                 formData.firstName,
                 formData.lastName
             );
-            navigate('/login');
+            setSuccess('Account created successfully! Redirecting to login...');
+            setTimeout(() => {
+                navigate('/login');
+            }, 2000);
         } catch (err) {
-            setError(err.response?.data?.message || 'Registration failed. Please try again.');
+            if (err.response?.status === 409) {
+                setError(err.response?.data?.message || 'Username or email already exists');
+            } else if (err.response?.status === 400) {
+                setError('Please check your input and try again');
+            } else {
+                setError('Registration failed. Please try again later');
+            }
         } finally {
             setLoading(false);
         }
@@ -47,6 +93,7 @@ const Register = () => {
             <div className="auth-card">
                 <h1>Create Account</h1>
                 {error && <div className="error-message">{error}</div>}
+                {success && <div className="success-message">{success}</div>}
                 
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
@@ -58,7 +105,8 @@ const Register = () => {
                             value={formData.username}
                             onChange={handleChange}
                             required
-                            placeholder="Enter username"
+                            minLength={3}
+                            placeholder="Enter username (min 3 characters)"
                         />
                     </div>
 
@@ -108,6 +156,7 @@ const Register = () => {
                             value={formData.password}
                             onChange={handleChange}
                             required
+                            minLength={6}
                             placeholder="Enter password (min 6 characters)"
                         />
                     </div>

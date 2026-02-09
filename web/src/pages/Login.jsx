@@ -16,18 +16,46 @@ const Login = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+        setError('');
+    };
+
+    const validateForm = () => {
+        if (!formData.identifier.trim()) {
+            setError('Please enter your username or email');
+            return false;
+        }
+        if (!formData.password) {
+            setError('Please enter your password');
+            return false;
+        }
+        if (formData.password.length < 6) {
+            setError('Password must be at least 6 characters');
+            return false;
+        }
+        return true;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+
+        if (!validateForm()) {
+            return;
+        }
+
         setLoading(true);
 
         try {
             await login(formData.identifier, formData.password);
             navigate('/dashboard');
         } catch (err) {
-            setError(err.response?.data?.message || 'Invalid credentials. Please try again.');
+            if (err.response?.status === 401) {
+                setError('Invalid username/email or password');
+            } else if (err.response?.status === 404) {
+                setError('Account not found. Please check your credentials');
+            } else {
+                setError('Login failed. Please try again later');
+            }
         } finally {
             setLoading(false);
         }
