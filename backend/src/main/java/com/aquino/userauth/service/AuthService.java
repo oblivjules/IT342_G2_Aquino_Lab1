@@ -1,17 +1,19 @@
 package com.aquino.userauth.service;
 
-import com.aquino.userauth.dto.AuthResponse;
-import com.aquino.userauth.dto.LoginRequest;
-import com.aquino.userauth.dto.RegisterRequest;
-import com.aquino.userauth.model.User;
-import com.aquino.userauth.repository.UserRepository;
-import com.aquino.userauth.security.TokenProvider;
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
+import com.aquino.userauth.dto.AuthResponse;
+import com.aquino.userauth.dto.LoginRequest;
+import com.aquino.userauth.dto.RegisterRequest;
+import com.aquino.userauth.model.User;
+import com.aquino.userauth.repository.UserRepository;
+import com.aquino.userauth.security.TokenBlacklistService;
+import com.aquino.userauth.security.TokenProvider;
 
 @Service
 public class AuthService {
@@ -19,14 +21,19 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
+    private final TokenBlacklistService tokenBlacklistService;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, TokenProvider tokenProvider) {
+    public AuthService(UserRepository userRepository,
+                       PasswordEncoder passwordEncoder,
+                       TokenProvider tokenProvider,
+                       TokenBlacklistService tokenBlacklistService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.tokenProvider = tokenProvider;
+        this.tokenBlacklistService = tokenBlacklistService;
     }
 
-    public void register(RegisterRequest request) {
+    public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already exists");
         }
@@ -41,6 +48,10 @@ public class AuthService {
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         userRepository.save(user);
+
+        // Generate token for immediate login after registration
+        String token = tokenProvider.generateToken(user.getUsername());
+        return new AuthResponse(token);
     }
 
     public AuthResponse login(LoginRequest request) {
@@ -57,5 +68,12 @@ public class AuthService {
 
         String token = tokenProvider.generateToken(user.getUsername());
         return new AuthResponse(token);
+    }
+
+    public void logout(String token) {
+        if (!tokenProvider.validateToken(token)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
+        }
+        tokenBlacklistService.blacklist(token, tokenProvider.getExpirationFromToken(token).toInstant());
     }
 }

@@ -17,6 +17,7 @@ axiosInstance.interceptors.request.use((config) => {
 export const authAPI = {
     register: (data) => axiosInstance.post('/auth/register', data),
     login: (data) => axiosInstance.post('/auth/login', data),
+    logout: () => axiosInstance.post('/auth/logout'),
     getCurrentUser: () => axiosInstance.get('/user/me'),
 };
 

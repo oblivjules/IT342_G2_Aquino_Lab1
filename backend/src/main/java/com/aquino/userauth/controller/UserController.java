@@ -1,5 +1,6 @@
 package com.aquino.userauth.controller;
 
+import com.aquino.userauth.dto.ApiResponse;
 import com.aquino.userauth.dto.UserResponse;
 import com.aquino.userauth.model.User;
 import com.aquino.userauth.repository.UserRepository;
@@ -23,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<UserResponse> getCurrentUser(Authentication authentication) {
+    public ResponseEntity<ApiResponse<UserResponse>> getCurrentUser(Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
         }
@@ -41,6 +42,6 @@ public class UserController {
                 user.getCreatedAt()
         );
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(ApiResponse.success("User profile loaded", response));
     }
 }

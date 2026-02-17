@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors -->
+    <color name="primary">#386641</color>
+    <color name="primary_dark">#386641</color>
+    <color name="secondary">#6a994e</color>
+    <color name="tertiary">#a7c957</color>
+    
+    <!-- Neutral Colors -->
+    <color name="text_dark">#333333</color>
+    <color name="text_medium">#666666</color>
+    <color name="text_light">#DDDDDD</color>
+    <color name="white">#FFFFFF</color>
+    <color name="beige">#f2e8cf</color>
+    
+    <!-- Status Colors -->
+    <color name="error">#bc4749</color>
+    <color name="error_light">#fce4e4</color>
+    <color name="error_text">#8b2c2e</color>
+    <color name="success">#2e7d32</color>
+    <color name="success_light">#e8f5e9</color>
+</resources>

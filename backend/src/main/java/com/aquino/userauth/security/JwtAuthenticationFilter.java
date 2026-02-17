@@ -1,11 +1,14 @@
 package com.aquino.userauth.security;
 
+import com.aquino.userauth.dto.ApiResponse;
 import com.aquino.userauth.repository.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -21,10 +24,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final TokenProvider tokenProvider;
     private final UserRepository userRepository;
+    private final TokenBlacklistService tokenBlacklistService;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public JwtAuthenticationFilter(TokenProvider tokenProvider, UserRepository userRepository) {
+    public JwtAuthenticationFilter(TokenProvider tokenProvider,
+                                   UserRepository userRepository,
+                                   TokenBlacklistService tokenBlacklistService) {
         this.tokenProvider = tokenProvider;
         this.userRepository = userRepository;
+        this.tokenBlacklistService = tokenBlacklistService;
     }
 
     @Override
@@ -33,6 +41,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
+            if (tokenBlacklistService.isBlacklisted(token)) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+                ApiResponse<Void> body = ApiResponse.error("Token is invalidated", null);
+                response.getWriter().write(objectMapper.writeValueAsString(body));
+                return;
+            }
             if (tokenProvider.validateToken(token)) {
                 String username = tokenProvider.getUsernameFromToken(token);
                 if (userRepository.findByUsername(username).isPresent()) {
