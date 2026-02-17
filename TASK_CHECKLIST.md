@@ -106,11 +106,6 @@
 - [x] Pushed to GitHub public repository
   - Repository: IT342_G2_Aquino_Lab1
 
-## IN-PROGRESS
-
-## TODO
-- [ ] Update FRS PDF in /docs with web + mobile screenshots and revised diagrams
-
 ## Notes
 
 ### Completed Features:
@@ -138,28 +133,4 @@ IT342_G2_<Lastname>_Lab1
 ├── README.md         (Project overview)
 └── TASK_CHECKLIST.md (This file)
 ```
-
-### How to Complete Remaining Tasks:
-
-1. **Capture Screenshots:**
-   - Start both backend and frontend
-  - Take screenshots of Register, Login, Dashboard/Profile (Web + Mobile)
-  - Save to /docs folder
-
-2. **Create FRS PDF:**
-   - Include ERD from provided diagrams
-   - Include UML diagrams from previous activity
-  - Add captured web and mobile UI screenshots
-   - Create professional PDF document
-
-3. **Push to GitHub:**
-  - Create new public GitHub repository named `IT342_G2_<Lastname>_Lab1`
-   - Push code: `git push origin master`
-   - Ensure all files are visible
-
-4. **Submit in MS Teams:**
-   - GitHub repository link
-   - FRS PDF from /docs
-   - Updated TASK_CHECKLIST.md
-   - Brief description of implementation
 

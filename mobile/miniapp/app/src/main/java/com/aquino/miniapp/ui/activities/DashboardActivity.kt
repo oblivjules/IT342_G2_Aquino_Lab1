@@ -41,49 +41,35 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun loadUser() {
-
         lifecycleScope.launch {
-
             try {
-
                 val user = authRepository.getCurrentUser()
 
                 if (user != null) {
-                    welcomeTitle.text =
-                        "Welcome, ${user.firstName ?: user.username}!"
+                    welcomeTitle.text = "Welcome, ${user.firstName ?: user.username}!"
                 } else {
                     redirectToLogin()
                 }
-
             } catch (e: Exception) {
-                // If session expired or network error, redirect to login
                 redirectToLogin()
-
             }
         }
     }
 
     private fun showLogoutDialog() {
-
         AlertDialog.Builder(this)
             .setTitle("Confirm Logout")
             .setMessage("Are you sure you want to logout?")
             .setPositiveButton("Logout") { _, _ ->
-
                 logoutButton.isEnabled = false
                 logoutButton.text = "Logging out..."
 
                 lifecycleScope.launch {
-
                     try {
-
                         authRepository.logout()
-
                     } catch (_: Exception) {
                     }
-
                     redirectToLogin()
-
                 }
             }
             .setNegativeButton("Cancel", null)
@@ -91,20 +77,13 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun redirectToLogin() {
-
         val intent = Intent(this, LoginActivity::class.java)
-
-        intent.flags =
-            Intent.FLAG_ACTIVITY_NEW_TASK or
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK
-
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
-
     }
 
     override fun onBackPressed() {
-        // When user presses back on Dashboard, exit the app instead of going back
         finishAffinity()
         super.onBackPressed()
     }
