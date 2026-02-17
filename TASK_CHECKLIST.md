@@ -27,6 +27,12 @@
   - Commit: 2a83905
 - [x] Add createdAt to user profile response
   - Commit: 4f1939d
+- [x] Add logout endpoint (/api/auth/logout) with token blacklist
+  - Commit: feat:0286124
+- [x] Implement error handling with standardized API responses
+  - Commit: feat:0286124
+- [x] Improve token validation and security configuration
+  - Commit: feat:0286124 (fix:b8e0845)
 
 ### Frontend Implementation
 - [x] React project setup with Vite
@@ -55,6 +61,8 @@
   - Commit: e03c6ff
 - [x] Responsive UI styling
   - Commit: 2b97a9c
+- [x] Logout endpoint integration with token blacklist
+  - Commit: feat:dcfa424
 
 ### Project Structure & Configuration
 - [x] Clean up duplicate project files
@@ -63,6 +71,24 @@
   - Commit: c4449e9
 - [x] Remove obsolete documentation files
   - Commit: ad3135a
+
+### Mobile Application - Android Kotlin
+- [x] Register screen with form validation
+  - Commit: feat:cbff204
+- [x] Login screen with credential validation
+  - Commit: feat:cbff204
+- [x] Dashboard/Profile screen (protected)
+  - Commit: feat:cbff204
+- [x] Logout functionality with confirmation dialog
+  - Commit: feat:cbff204
+- [x] API client and interceptor for backend integration
+  - Commit: feat:cbff204
+- [x] AuthViewModel for state management
+  - Commit: feat:cbff204
+- [x] Session and Token management for persistent authentication
+  - Commit: feat:cbff204
+- [x] Proper navigation flow between screens
+  - Commit: feat:cbff204
 
 ### Documentation
 - [x] README.md documentation
@@ -81,35 +107,35 @@
   - Repository: IT342_G2_Aquino_Lab1
 
 ## IN-PROGRESS
-- [ ] None
 
 ## TODO
-- [ ] Mobile application implementation (future enhancement)
+- [ ] Update FRS PDF in /docs with web + mobile screenshots and revised diagrams
 
 ## Notes
 
 ### Completed Features:
 ✅ Full backend REST API with Spring Boot
+✅ Backend logout endpoint with token blacklist support
+✅ Standardized API responses with error handling
 ✅ Complete web application with React
-✅ User registration and login with validation
-✅ Protected routes and endpoints
+✅ Complete mobile application with Android Kotlin
+✅ User registration and login with validation (Web + Mobile)
+✅ Protected routes and endpoints (Web + Mobile)
 ✅ JWT-based authentication
 ✅ BCrypt password encryption
 ✅ MySQL database integration
 ✅ CORS configuration for frontend
-✅ Responsive UI with modern styling
+✅ Responsive UI with modern styling (Web + Mobile)
 ✅ Complete documentation
 
 ### Repository Structure:
 ```
-IT342_G5_<Lastname>_Lab1
+IT342_G2_<Lastname>_Lab1
 ├── /web              (React frontend - READY)
 ├── /backend          (Spring Boot API - READY)
-├── /mobile           (placeholder for future)
+├── /mobile           (Android Kotlin app)
 ├── /docs             (documentation folder)
 ├── README.md         (Project overview)
-├── QUICK_START.md    (Setup instructions)
-├── IMPLEMENTATION_SUMMARY.md (Detailed documentation)
 └── TASK_CHECKLIST.md (This file)
 ```
 
@@ -117,17 +143,17 @@ IT342_G5_<Lastname>_Lab1
 
 1. **Capture Screenshots:**
    - Start both backend and frontend
-   - Take screenshots of Register, Login, Dashboard pages
-   - Save to /docs folder
+  - Take screenshots of Register, Login, Dashboard/Profile (Web + Mobile)
+  - Save to /docs folder
 
 2. **Create FRS PDF:**
    - Include ERD from provided diagrams
    - Include UML diagrams from previous activity
-   - Add captured web UI screenshots
+  - Add captured web and mobile UI screenshots
    - Create professional PDF document
 
 3. **Push to GitHub:**
-   - Create new public GitHub repository named `IT342_G5_<Lastname>_Lab1`
+  - Create new public GitHub repository named `IT342_G2_<Lastname>_Lab1`
    - Push code: `git push origin master`
    - Ensure all files are visible
 
