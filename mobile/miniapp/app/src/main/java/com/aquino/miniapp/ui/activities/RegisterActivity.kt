@@ -35,7 +35,6 @@ class RegisterActivity : AppCompatActivity() {
 
         authRepository = AuthRepository(this)
 
-        // Bind views
         usernameInput = findViewById(R.id.username_input)
         emailInput = findViewById(R.id.email_input)
         firstNameInput = findViewById(R.id.first_name_input)
@@ -48,7 +47,6 @@ class RegisterActivity : AppCompatActivity() {
         errorMessage = findViewById(R.id.error_message)
         errorContainer = findViewById(R.id.error_container)
 
-        // Clear error when typing
         listOf(
             usernameInput,
             emailInput,
@@ -81,10 +79,8 @@ class RegisterActivity : AppCompatActivity() {
         val password = passwordInput.text.toString()
         val confirmPassword = confirmPasswordInput.text.toString()
 
-        // Clear previous errors
         errorContainer.visibility = TextView.GONE
 
-        // Validation
         when {
             username.isBlank() -> return showError("Username is required")
             username.length < 3 -> return showError("Username must be at least 3 characters long")
@@ -96,24 +92,18 @@ class RegisterActivity : AppCompatActivity() {
             lastName.isNotBlank() && lastName.length < 2 -> return showError("Last name must be at least 2 characters")
         }
 
-        // Disable button during registration
         registerButton.isEnabled = false
         registerButton.text = "Creating account..."
 
-        // Perform registration
         lifecycleScope.launch {
             try {
                 authRepository.register(username, email, password, firstName, lastName)
-
-                // Clear session so LoginActivity opens clean
                 SessionManager.clearSession(this@RegisterActivity)
 
-                // Redirect to LoginActivity with proper flags to clear stack
                 val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 finish()
-
             } catch (e: Exception) {
                 val errorMsg = e.message ?: "An error occurred during registration"
                 val displayMessage = when {

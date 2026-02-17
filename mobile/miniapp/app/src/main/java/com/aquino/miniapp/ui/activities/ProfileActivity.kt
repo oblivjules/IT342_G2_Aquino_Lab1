@@ -39,36 +39,26 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun loadProfile() {
-
         lifecycleScope.launch {
-
             try {
-
                 val user = authRepository.getCurrentUser()
 
                 if (user != null) {
-
                     usernameValue.text = user.username
                     emailValue.text = user.email
                     firstNameValue.text = user.firstName ?: "N/A"
                     lastNameValue.text = user.lastName ?: "N/A"
-
                 } else {
-
                     usernameValue.text = "Not available"
                     emailValue.text = "Not available"
                     firstNameValue.text = "Not available"
                     lastNameValue.text = "Not available"
-
                 }
-
             } catch (e: Exception) {
-
                 usernameValue.text = "Error loading profile"
                 emailValue.text = "-"
                 firstNameValue.text = "-"
                 lastNameValue.text = "-"
-
             }
         }
     }

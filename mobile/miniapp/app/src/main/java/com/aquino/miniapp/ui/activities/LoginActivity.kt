@@ -27,10 +27,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Initialize repositories
         authRepository = AuthRepository(this)
 
-        // Bind views
         identifierInput = findViewById(R.id.identifier_input)
         passwordInput = findViewById(R.id.password_input)
         loginButton = findViewById(R.id.login_button)
@@ -38,7 +36,6 @@ class LoginActivity : AppCompatActivity() {
         errorMessage = findViewById(R.id.error_message)
         errorContainer = findViewById(R.id.error_container)
 
-        // Clear error when typing
         identifierInput.setOnFocusChangeListener { _, _ ->
             errorContainer.visibility = TextView.GONE
         }
@@ -47,13 +44,10 @@ class LoginActivity : AppCompatActivity() {
             errorContainer.visibility = TextView.GONE
         }
 
-        // Login button click
         loginButton.setOnClickListener {
-
             val identifier = identifierInput.text.toString().trim()
             val password = passwordInput.text.toString()
 
-            // Validation
             if (identifier.isBlank()) {
                 showError("Please enter your username or email")
                 return@setOnClickListener
@@ -69,31 +63,24 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Show loading state
             loginButton.isEnabled = false
             loginButton.text = "Logging in..."
             errorContainer.visibility = TextView.GONE
 
-            // Use lifecycleScope (correct way)
             lifecycleScope.launch {
                 try {
-
                     val userResponse = authRepository.login(identifier, password)
 
                     if (userResponse != null) {
-
                         val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                         finish()
-
                     } else {
                         showError("Invalid username/email or password")
                         resetLoginButton()
                     }
-
                 } catch (e: Exception) {
-
                     val errorMsg = e.message ?: "Login failed"
                     val displayMessage = when {
                         errorMsg.contains("Network", ignoreCase = true) -> 
@@ -108,12 +95,10 @@ class LoginActivity : AppCompatActivity() {
                     }
                     showError(displayMessage)
                     resetLoginButton()
-
                 }
             }
         }
 
-        // Register button click
         registerLink.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
